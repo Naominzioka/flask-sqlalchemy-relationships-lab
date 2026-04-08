@@ -64,7 +64,7 @@ def get_speakers():
 
 @app.route('/speakers/<int:id>')
 def get_speaker(id):
-    speaker = Speaker.query.get(id)
+    speaker = db.session.get(Speaker, id)
     if speaker:
         bio_content = speaker.bio.bio_text if speaker.bio else "No bio available"
         speaker_dict = {
@@ -81,7 +81,7 @@ def get_speaker(id):
 
 @app.route('/sessions/<int:id>/speakers')
 def get_session_speakers(id):
-    session = Session.query.get(id)
+    session = db.session.get(Session, id)
     if session:
         all_speakers = []
         for s in session.speakers :
